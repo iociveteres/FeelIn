@@ -17,9 +17,9 @@ public class Form extends RepresentationModel<Form> {
     private int pressureHigh;
     private int pressureLow;
     private int pulse;
-    private float temperature; // 1 to 10
+    private float temperature;
     private int sleepQuality; // 1 to 10
-    private int generalState;
+    private int generalState; // 1 to 10
 
     private LocalDateTime completionDate;
 }
