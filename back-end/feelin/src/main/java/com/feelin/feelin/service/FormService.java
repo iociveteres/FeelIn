@@ -20,7 +20,7 @@ public class FormService {
         form.setPressureHigh(new Random().nextInt(100,180));
         form.setPressureLow(new Random().nextInt(60,120));
         form.setPulse(new Random().nextInt(50, 100));
-        form.setTemperature((new Random().nextFloat(35, 41));
+        form.setTemperature(new Random().nextFloat(35, 41));
         form.setSleepQuality(new Random().nextInt(1000));
         form.setGeneralState(new Random().nextInt(1000));
 
@@ -62,7 +62,6 @@ public class FormService {
         return responseMessage;
     }
 
-    public String deleteForm(Form form, int patientNumber, Locale locale){
     public String deleteForm(Form form, int patientNumber, Locale locale){
         String responseMessage = null;
         //mock check that entry exists
