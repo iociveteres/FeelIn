@@ -22,7 +22,7 @@ public class FormController {
     @GetMapping(value="/{patientId}")
     public ResponseEntity<Form> getForm(
             @PathVariable("patientId") int patientId,
-            @RequestHeader(value = "Accept-Language", required = false)
+            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
             Locale locale) {
         Form Form = FormService.getForm(patientId);
 
@@ -43,7 +43,7 @@ public class FormController {
     @PostMapping
     public ResponseEntity<String> createForm(
             @RequestBody Form request,
-            @RequestHeader(value = "Accept-Language", required = false)
+            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
             Locale locale) {
         return ResponseEntity.ok(FormService.createForm(request, locale));
     }
@@ -52,7 +52,7 @@ public class FormController {
     public ResponseEntity<String> updateForm(
             @PathVariable("patientId") int patientId,
             @RequestBody Form request,
-            @RequestHeader(value = "Accept-Language", required = false)
+            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
             Locale locale) {
         String response = FormService.updateForm(request, patientId, locale);
         return ResponseEntity.ok(response);
@@ -62,7 +62,7 @@ public class FormController {
     public ResponseEntity<String> deleteForm(
             @PathVariable("patientId") int patientId,
             @RequestBody Form request,
-            @RequestHeader(value = "Accept-Language", required = false)
+            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
             Locale locale)
     {
         String response = FormService.deleteForm(request, patientId, locale);
