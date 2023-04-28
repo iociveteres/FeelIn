@@ -49,13 +49,13 @@ public class FormController {
     }
 
     @PutMapping(value="/{patientId}")
-    public ResponseEntity<String> updateForm(
+    public ResponseEntity<Form> updateForm(
             @PathVariable("patientId") int patientId,
             @RequestBody Form request,
             @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
             Locale locale) {
-        String response = FormService.updateForm(request, patientId, locale);
-        return ResponseEntity.ok(response);
+        Form updatedForm = FormService.updateForm(request, patientId, locale);
+        return ResponseEntity.ok(updatedForm);
     }
 
     @DeleteMapping(value="/{patientId}")

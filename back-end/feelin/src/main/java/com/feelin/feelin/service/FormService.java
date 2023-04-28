@@ -39,7 +39,7 @@ public class FormService {
         return responseMessage;
     }
 
-    public String updateForm(Form form, int patientId, Locale locale) {
+    public Form updateForm(Form form, int patientId, Locale locale) {
         //mock find entry by patientId, formId
         Form original = new Form();
         // you get it from form too
@@ -55,11 +55,11 @@ public class FormService {
         // take it from front-end
         original.setCompletionDate(form.getCompletionDate());
 
-        String responseMessage = null;
-        if (form != null) {
-            responseMessage = String.format(messages.getMessage("form.update.message", null, locale), form.toString());
-        }
-        return responseMessage;
+//        String responseMessage = null;
+//        if (form != null) {
+//            responseMessage = String.format(messages.getMessage("form.update.message", null, locale), form.toString());
+//        }
+        return original;
     }
 
     public String deleteForm(Form form, int patientNumber, Locale locale){
