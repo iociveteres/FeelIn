@@ -7,6 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -20,24 +21,24 @@ public class FormController {
     @Autowired
     MessageSource messages;
     @GetMapping(value="/{patientId}")
-    public ResponseEntity<Form> getForm(
+    public ResponseEntity<ArrayList<Form>> getForm(
             @PathVariable("patientId") int patientId,
             @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
             Locale locale) {
-        Form Form = FormService.getForm(patientId);
+        ArrayList<Form> Form = FormService.getForm(patientId);
 
-        Form.add(linkTo(methodOn(FormController.class)
-                        .getForm(patientId, locale))
-                        .withSelfRel(),
-                linkTo(methodOn(FormController.class)
-                        .createForm(Form, locale))
-                        .withRel(messages.getMessage("form.urlcreate.message", null, locale)),
-                linkTo(methodOn(FormController.class)
-                        .updateForm(patientId, Form, null))
-                        .withRel(messages.getMessage("form.urlupdate.message", null, locale)),
-                linkTo(methodOn(FormController.class)
-                        .deleteForm(patientId, Form,null))
-                        .withRel(messages.getMessage("form.urldelete.message", null, locale)));
+//        Form.add(linkTo(methodOn(FormController.class)
+//                        .getForm(patientId, locale))
+//                        .withSelfRel(),
+//                linkTo(methodOn(FormController.class)
+//                        .createForm(Form, locale))
+//                        .withRel(messages.getMessage("form.urlcreate.message", null, locale)),
+//                linkTo(methodOn(FormController.class)
+//                        .updateForm(patientId, Form, null))
+//                        .withRel(messages.getMessage("form.urlupdate.message", null, locale)),
+//                linkTo(methodOn(FormController.class)
+//                        .deleteForm(patientId, Form,null))
+//                        .withRel(messages.getMessage("form.urldelete.message", null, locale)));
         return ResponseEntity.ok(Form);
     }
     @PostMapping
