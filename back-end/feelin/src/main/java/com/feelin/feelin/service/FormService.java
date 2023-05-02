@@ -4,14 +4,21 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Random;
 
+import com.feelin.feelin.repo.FormRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import com.feelin.feelin.model.Form;
 @Service
 public class FormService {
+
     @Autowired
     MessageSource messages;
+
+    @Autowired
+    private FormRepo formRepositories;
+
+
     public Form getForm(int patientsNumber) {
         Form form = new Form();
         form.setPatientId(new Random().nextInt(1000));
@@ -33,6 +40,8 @@ public class FormService {
     public String createForm(Form form, Locale locale){
         String responseMessage = null;
         if(form != null) {
+            form.setCompletionDate(LocalDateTime.now());
+            formRepositories.save(form);
             //form.setHospitalName(hospitalName);
             responseMessage = String.format(messages.getMessage("form.create.message", null, locale), form.toString());
         }
