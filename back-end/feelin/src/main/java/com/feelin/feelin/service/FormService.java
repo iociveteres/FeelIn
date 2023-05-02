@@ -1,6 +1,8 @@
 package com.feelin.feelin.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -18,22 +20,27 @@ public class FormService {
     @Autowired
     private FormRepo formRepositories;
 
+    public ArrayList<Form> getForm(int patientsNumber) {
+        ArrayList<Form> formList = new ArrayList<Form>();
 
-    public Form getForm(int patientsNumber) {
-        Form form = new Form();
-        form.setPatientId(new Random().nextInt(1000));
-        form.setFormId(new Random().nextInt(1000));
+        int patientId = new Random().nextInt(1000);
+        for (int i = 0; i < 4; i++) {
+            Form form = new Form();
+            form.setPatientId(patientId);
+            form.setFormId(new Random().nextInt(1000));
 
-        form.setPressureHigh(new Random().nextInt(100,180));
-        form.setPressureLow(new Random().nextInt(60,120));
-        form.setPulse(new Random().nextInt(50, 100));
-        form.setTemperature(Math.round(new Random().nextFloat(35, 41) * 10.0f) / 10.0f);
-        form.setSleepQuality(new Random().nextInt(10));
-        form.setGeneralState(new Random().nextInt(10));
+            form.setPressureHigh(new Random().nextInt(100,180));
+            form.setPressureLow(new Random().nextInt(60,120));
+            form.setPulse(new Random().nextInt(50, 100));
+            form.setTemperature(Math.round(new Random().nextFloat(35, 41) * 10.0f) / 10.0f);
+            form.setSleepQuality(new Random().nextInt(10));
+            form.setGeneralState(new Random().nextInt(10));
 
-        form.setCompletionDate(LocalDateTime.now());
+            form.setCompletionDate(LocalDateTime.now());
+            formList.add(form);
+        }
 
-        return form;
+        return formList;
     }
 
 
