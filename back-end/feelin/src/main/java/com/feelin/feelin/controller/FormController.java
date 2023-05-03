@@ -41,7 +41,7 @@ public class FormController {
 //                        .withRel(messages.getMessage("form.urldelete.message", null, locale)));
         return ResponseEntity.ok(Form);
     }
-    @PostMapping
+    @PostMapping("/addForm")
     public ResponseEntity<String> createForm(
             @RequestBody Form request,
             @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
