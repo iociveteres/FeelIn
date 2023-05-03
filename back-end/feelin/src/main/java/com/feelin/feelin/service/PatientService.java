@@ -21,4 +21,8 @@ public class PatientService {
     public Patient getPatient(int patientsNumber) {
         return patientRepo.findById(patientsNumber).orElseThrow();
     }
+
+    public ArrayList<Patient> getPatientsByDocId(int doctorId) {
+        return patientRepo.findAllPatientsByDocId(doctorId);
+    }
 }
