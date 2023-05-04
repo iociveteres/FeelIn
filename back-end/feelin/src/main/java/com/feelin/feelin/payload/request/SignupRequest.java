@@ -44,17 +44,16 @@ public class SignupRequest {
     private int polyclinicId;
 
     // specifically for patient
-    @NotBlank
     @Size(max = 50)
     private String male; // means sex
-    @NotBlank
     @Size(max = 50)
     private LocalDateTime dateOfBirth;
 
     // specifically for doctor
-    @NotBlank
     @Size(max = 50)
     private int cabinetNumber;
+    @Size(max = 50)
+    private String specialization;
 
 }
 
