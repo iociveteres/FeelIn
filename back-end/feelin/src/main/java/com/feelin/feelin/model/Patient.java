@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 public class Patient extends RepresentationModel<Patient> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int patientId;
+    @Column(name = "patient_id", nullable = false)
+    private long patientId;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
