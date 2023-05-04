@@ -1,9 +1,16 @@
 package com.feelin.feelin.payload.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 
+@Getter
+@Setter
 public class SignupRequest {
     @NotBlank
     @Size(min = 3, max = 20)
@@ -20,36 +27,34 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String password;
 
-    public String getUsername() {
-        return username;
-    }
+    @NotBlank
+    @Size(max = 50)
+    private String firstName;
+    @NotBlank
+    @Size(max = 50)
+    private String lastName;
+    @NotBlank
+    @Size(max = 50)
+    private String surname;
+    @NotBlank
+    @Size(max = 50)
+    private String contactNumber;
+    @NotBlank
+    @Size(max = 50)
+    private int polyclinicId;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    // specifically for patient
+    @NotBlank
+    @Size(max = 50)
+    private String male; // means sex
+    @NotBlank
+    @Size(max = 50)
+    private LocalDateTime dateOfBirth;
 
-    public String getEmail() {
-        return email;
-    }
+    // specifically for doctor
+    @NotBlank
+    @Size(max = 50)
+    private int cabinetNumber;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<String> getRole() {
-        return this.role;
-    }
-
-    public void setRole(Set<String> role) {
-        this.role = role;
-    }
 }
 
