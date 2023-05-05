@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.ArrayList;
 
-public interface PatientRepo extends JpaRepository<Patient,Integer> {
+public interface PatientRepo extends JpaRepository<Patient,Long> {
 
     @Query(value = """
             SELECT patient.*
@@ -17,5 +17,5 @@ public interface PatientRepo extends JpaRepository<Patient,Integer> {
             INNER JOIN doctor as doctor
                 ON patient.polyclinic_id = doctor.polyclinic_id
             WHERE doctor.doctor_id = :doctor_id""", nativeQuery = true)
-    ArrayList<Patient> findAllPatientsByDocId(@Param("doctor_id") Integer doctorId);
+    ArrayList<Patient> findAllPatientsByDocId(@Param("doctor_id") Long doctorId);
 }
