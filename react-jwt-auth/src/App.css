@@ -1,0 +1,232 @@
+html, body .App {
+  width: 100%;
+  height: 100%;
+  background-image: url("img/background.png");
+}
+
+a {
+  text-align: right;
+  font-size: 15px;
+  font-family: "Century Gothic";
+  color: rgb(80, 153, 153);
+  text-decoration: underline;
+  line-height: 1.2;
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+
+a:hover {
+  color: rgb(104, 65, 136);
+}
+
+.AppMain {
+  padding: 95px;
+  font-size: 24px;
+  font-family: "Century Gothic";
+  color: rgb(57, 62, 89);
+  line-height: 1.2;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  column-gap: 150px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.AppMain h2{
+  font-weight: normal;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+
+.App-header {
+  padding-inline: 95px;
+  margin-bottom: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App-header a {
+  font-size: 24px;
+  color: rgb(1, 3, 38);
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.App-header a:hover {
+  color: rgb(111, 191, 191);
+}
+
+.App-logo {
+  display: inherit;
+  align-items: center;
+}
+.App-logo h1{
+  font-size: 64px;
+  font-family: "Century Gothic";
+  font-weight: normal;
+  color: rgb(1, 3, 38);
+  line-height: 1.2;
+  text-align: center;
+}
+
+
+
+.App-logo img{
+  height: 64px;
+  width: 64px;
+}
+
+ul {
+  list-style-type: none
+}
+
+li {
+  padding-bottom: 25px;
+}
+
+.App-enter {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 59px;
+  background-image: -moz-linear-gradient( 90deg, rgb(200, 233, 233) 0%, rgb(240,242,242) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(200, 233, 233) 0%, rgb(240,242,242) 100%);
+
+  box-shadow: 5.785px 6.894px 16.56px 1.44px rgba(0, 0, 0, 0.26);
+}
+
+.text_highlight {
+  color: rgb(130, 217, 217);
+}
+
+
+.Wrapper {
+  margin-block: 15px;
+  margin-inline: 35px;
+  display: inherit;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.Button-image {
+  width: 25px;
+
+}
+
+.App-button {
+ 
+  padding-inline: 75px;
+  padding-block: 8px;
+  border-radius: 20px;
+  font-size: 16px;
+  border-style: none;
+  color: rgb(240, 242, 242);
+  background-color: rgb(111, 191, 191);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  font-family: "Century Gothic";
+  box-shadow: 5.785px 6.894px 16.56px 1.44px rgba(0, 0, 0, 0.26);
+  transition: 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-button:hover {
+  transform: scale(0.95);
+  background-color: rgb(65, 136, 136);
+}
+
+
+.App-form {
+  max-width: 480px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
+  background-image: -moz-linear-gradient( 90deg, rgb(200, 233, 233) 0%, rgb(240,242,242) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(200, 233, 233) 0%, rgb(240,242,242) 100%);
+  box-shadow: 5.785px 6.894px 16.56px 1.44px rgba(0, 0, 0, 0.26);
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+
+
+
+label {
+  font-size: 18px;
+  font-family: "Century Gothic";
+  color: rgb(57, 62, 89);
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-button {
+
+  padding-inline: 75px;
+  padding-block: 8px;
+  border-radius: 20px;
+  font-size: 18px;
+  border-style: none;
+  color: rgb(240, 242, 242);
+  background-color: rgb(111, 191, 191);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  font-family: "Century Gothic";
+  box-shadow: 5.785px 6.894px 16.56px 1.44px rgba(0, 0, 0, 0.26);
+  transition: 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-button:hover {
+  transform: scale(0.95);
+  background-color: rgb(65, 136, 136);
+}
+
+.form-group {
+  margin-top: 5px;
+}
+
+.form-control {
+  font-family: "Century Gothic";
+  max-width: 640px;
+  padding: 8px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  border-color: rgba(0, 0, 0, 0.2);
+  background-color: rgb(240, 242, 242);
+  box-shadow: inset 1.847px 2.364px 0px 0px rgba(0, 0, 0, 0.15);
+}
+
+.alert {
+  margin-top: 15px;
+  border-radius: 25px;
+  max-width: 350px;
+}
+
+.imp {
+ 
+  color: red;
+}
+
+span {
+  white-space: nowrap;
+}
