@@ -169,7 +169,7 @@ export default class Register extends Component {
       AuthService.register(
         this.state.username,
         this.state.password,
-        this.state.role,
+        ["user", this.state.role],
         this.state.firstName,
         this.state.lastName,
         this.state.surname,
