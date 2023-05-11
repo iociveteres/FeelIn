@@ -18,11 +18,11 @@ public class PatientService {
     @Autowired
     private PatientRepo patientRepo;
 
-    public Patient getPatient(int patientsNumber) {
+    public Patient getPatient(long patientsNumber) {
         return patientRepo.findById(patientsNumber).orElseThrow();
     }
 
-    public ArrayList<Patient> getPatientsByDocId(int doctorId) {
+    public ArrayList<Patient> getPatientsByDocId(long doctorId) {
         return patientRepo.findAllPatientsByDocId(doctorId);
     }
 }

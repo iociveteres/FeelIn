@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 @ToString
 @Data
 @Entity
-@Table(name = "patients")
-public class Patient extends RepresentationModel<Patient> {
+@Table(name = "doctor")
+public class Doctor extends RepresentationModel<Doctor> {
 
     @Id
-    @Column(name = "patient_id", nullable = false)
-    private long patientId;
+    @Column(name = "doctor_id", nullable = false)
+    private long doctorId;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -26,10 +26,10 @@ public class Patient extends RepresentationModel<Patient> {
     private String lastName;
     @Column(name = "surname", nullable = false)
     private String surname;
-    @Column(name = "male", nullable = false)
-    private String male;
-    @Column(name = "date_of_birth", nullable = false)
-    private LocalDateTime dateOfBirth;
+    @Column(name = "specialization", nullable = false)
+    private String specialization;
+    @Column(name = "cabinet_number", nullable = false)
+    private int cabinetNumber;
     @Column(name = "contact_number", nullable = false)
     private String contactNumber;
     @Column(name = "polyclinic_id", nullable = false)

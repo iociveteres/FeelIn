@@ -22,7 +22,7 @@ public class PatientController {
 
     @GetMapping(value="/{patientId}")
     public ResponseEntity<Patient> getPatient(
-            @PathVariable("patientId") int patientId,
+            @PathVariable("patientId") long patientId,
             @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
                     Locale locale) {
         Patient patient = PatientService.getPatient(patientId);
@@ -31,7 +31,7 @@ public class PatientController {
 
     @GetMapping(value="/byDocId/{doctorId}")
     public ResponseEntity<ArrayList<Patient>> getPatientsByDocId(
-            @PathVariable("doctorId") int doctorId,
+            @PathVariable("doctorId") long doctorId,
             @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
             Locale locale) {
         ArrayList<Patient> patients = PatientService.getPatientsByDocId(doctorId);
