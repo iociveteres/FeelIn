@@ -22,9 +22,7 @@ public class DoctorController {
 
     @GetMapping(value="/{doctorId}")
     public ResponseEntity<Doctor> getDoctor(
-            @PathVariable("doctorId") long doctorId,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-                    Locale locale) {
+            @PathVariable("doctorId") long doctorId) {
         Doctor doctor = DoctorService.getDoctor(doctorId);
         return ResponseEntity.ok(doctor);
     }

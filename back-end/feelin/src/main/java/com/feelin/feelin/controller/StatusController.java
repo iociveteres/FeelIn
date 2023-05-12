@@ -22,13 +22,11 @@ public class StatusController {
     MessageSource messages;
     @GetMapping(value="/{patientId}")
     public ResponseEntity<Status> getStatus(
-            @PathVariable("patientId") int patientId,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-            Locale locale) {
+            @PathVariable("patientId") int patientId) {
         Status status = statusService.getStatus(patientId);
 
         status.add(linkTo(methodOn(StatusController.class)
-                        .getStatus(patientId, locale))
+                        .getStatus(patientId))
                         .withSelfRel());
         return ResponseEntity.ok(status);
     }

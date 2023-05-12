@@ -25,17 +25,17 @@ public class FormService {
     }
 
 
-    public String createForm(Form form, Locale locale){
+    public String createForm(Form form){
         String responseMessage = null;
         if(form != null) {
             form.setCompletionDate(LocalDateTime.now());
             formRepositories.save(form);
-            responseMessage = String.format(messages.getMessage("form.create.message", null, locale), form.toString());
+            responseMessage = "Form created successfully";
         }
         return responseMessage;
     }
 
-    public Form updateForm(Form form, int patientId, Locale locale) {
+    public Form updateForm(Form form, int patientId) {
         //mock find entry by patientId, formId
         Form original = new Form();
         // you get it from form too
@@ -58,11 +58,11 @@ public class FormService {
         return original;
     }
 
-    public String deleteForm(Form form, int patientNumber, Locale locale){
+    public String deleteForm(Form form, int patientNumber){
         String responseMessage = null;
         //mock check that entry exists
         if (form != null) {
-            responseMessage = String.format(messages.getMessage("form.delete.message", null, locale), form.toString());
+            responseMessage = "Form deleted successfully";
         }
         return responseMessage;
     }

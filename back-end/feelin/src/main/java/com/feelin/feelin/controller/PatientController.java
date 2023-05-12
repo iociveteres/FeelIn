@@ -23,18 +23,14 @@ public class PatientController {
 
     @GetMapping(value="/{patientId}")
     public ResponseEntity<Patient> getPatient(
-            @PathVariable("patientId") long patientId,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-                    Locale locale) {
+            @PathVariable("patientId") long patientId) {
         Patient patient = PatientService.getPatient(patientId);
         return ResponseEntity.ok(patient);
     }
 
     @GetMapping(value="/byDocId/{doctorId}")
     public ResponseEntity<ArrayList<Patient>> getPatientsByDocId(
-            @PathVariable("doctorId") long doctorId,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-            Locale locale) {
+            @PathVariable("doctorId") long doctorId) {
         ArrayList<Patient> patients = PatientService.getPatientsByDocId(doctorId);
         return ResponseEntity.ok(patients);
     }

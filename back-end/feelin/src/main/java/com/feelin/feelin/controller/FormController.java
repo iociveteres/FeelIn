@@ -24,9 +24,7 @@ public class FormController {
     MessageSource messages;
     @GetMapping(value="/{patientId}")
     public ResponseEntity<ArrayList<Form>> getForm(
-            @PathVariable("patientId") int patientId,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-            Locale locale) {
+            @PathVariable("patientId") int patientId) {
         ArrayList<Form> Form = FormService.getForm(patientId);
 
 //        Form.add(linkTo(methodOn(FormController.class)
@@ -45,30 +43,24 @@ public class FormController {
     }
     @PostMapping(value="/addForm")
     public ResponseEntity<String> createForm(
-            @RequestBody Form request,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-            Locale locale) {
-        return ResponseEntity.ok(FormService.createForm(request, locale));
+            @RequestBody Form request) {
+        return ResponseEntity.ok(FormService.createForm(request));
     }
 
     @PutMapping(value="/{patientId}")
     public ResponseEntity<Form> updateForm(
             @PathVariable("patientId") int patientId,
-            @RequestBody Form request,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-            Locale locale) {
-        Form updatedForm = FormService.updateForm(request, patientId, locale);
+            @RequestBody Form request) {
+        Form updatedForm = FormService.updateForm(request, patientId);
         return ResponseEntity.ok(updatedForm);
     }
 
     @DeleteMapping(value="/{patientId}")
     public ResponseEntity<String> deleteForm(
             @PathVariable("patientId") int patientId,
-            @RequestBody Form request,
-            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "en")
-            Locale locale)
+            @RequestBody Form request)
     {
-        String response = FormService.deleteForm(request, patientId, locale);
+        String response = FormService.deleteForm(request, patientId);
         return ResponseEntity.ok(response);
     }
 }
