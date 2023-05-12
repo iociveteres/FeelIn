@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.ArrayList;
 
-public interface DoctorRepo extends JpaRepository<Doctor, Integer> {
+public interface DoctorRepo extends JpaRepository<Doctor, Long> {
 
 }

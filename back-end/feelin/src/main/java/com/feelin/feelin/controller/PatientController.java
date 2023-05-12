@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value="patient")
 public class PatientController {
 
