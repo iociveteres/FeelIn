@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-FROM maven:3.6.0-jdk-17-slim AS builder
+FROM openjdk:17-jdk-slim AS builder
 ADD . /src
 WORKDIR /src
 RUN ./mvnw package -DskipTests
