@@ -25,9 +25,6 @@ public class StatusController {
             @PathVariable("patientId") int patientId) {
         Status status = statusService.getStatus(patientId);
 
-        status.add(linkTo(methodOn(StatusController.class)
-                        .getStatus(patientId))
-                        .withSelfRel());
         return ResponseEntity.ok(status);
     }
 }
