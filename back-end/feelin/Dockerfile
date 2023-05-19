@@ -4,6 +4,7 @@
 FROM eclipse-temurin:17-jdk-alpine AS builder
 ADD . /src
 WORKDIR /src
+RUN chmod +x mvnw
 RUN ./mvnw package -DskipTests
 
 #
