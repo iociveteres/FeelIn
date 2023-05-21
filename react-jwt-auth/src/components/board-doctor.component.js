@@ -232,7 +232,7 @@ export default class BoardDoctor extends Component {
                                 return(
                                 <div key={fIndex}>
                                   <li className="App-list__element" onClick={e=>this.onClickForm(e, form.formId)}>
-                                    <h3>Анкета №{fIndex}</h3>
+                                    <h3>Анкета №{fIndex+1}</h3>
                                     <p>Дата прохождения: {form.completionDate.slice(0,-9)}</p>
                                   </li>
                                   
