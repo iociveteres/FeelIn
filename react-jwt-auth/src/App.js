@@ -51,7 +51,6 @@ class App extends Component {
             <a href="/"><img src={logo} alt=""/></a>
             </div>
             <div>
-              <a href="/">Главная</a>
               <a href="/">Помощь</a>
             </div>
             
