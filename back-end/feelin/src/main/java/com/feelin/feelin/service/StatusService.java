@@ -30,7 +30,7 @@ public class StatusService {
 
     private Status checkStatus(List<Form> tail) {
         Status status = new Status();
-        int risk_factor = 0;
+        int risk_factor = 2;
 
         for (Form e: tail) {
             // high
@@ -61,7 +61,7 @@ public class StatusService {
         if (risk_factor >= 4)
             status.setStatusCode(1);
         if (risk_factor >= 12 )
-            status.setStatusCode(2);
+            status.setStatusCode(0);
 
         return status;
     }
