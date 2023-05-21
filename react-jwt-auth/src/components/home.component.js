@@ -26,7 +26,7 @@ export default class Home extends Component {
                     Вход
                 </Link>
                 <Link to={"/register"} className="App-button">
-                    Зарегистрироваться
+                    Регистрация
                 </Link>
                 </div>
 

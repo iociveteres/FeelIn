@@ -57,6 +57,7 @@ class App extends Component {
   render() {
 
     const {currentUser} = this.state;
+    var currentPath = window.location.pathname;
 
     return (
       <div className="App">
@@ -66,7 +67,7 @@ class App extends Component {
             <a href="/"><img src={logo} alt=""/></a>
             </div>
             <div>
-            <button className="App-button" onClick={e=>this.showModal(e)}>Помощь</button>
+            {currentPath==="/profile" && (<button className="App-button" onClick={e=>this.showModal(e)}>Помощь</button>)}
               <div className={this.state.modalActive ? "Modal Active": "Modal"} onClick={e=>this.hideModal(e)}>
                   <div className="Modal-content" onClick={e=>e.stopPropagation()}>
                       {(currentUser!==undefined && currentUser.roles.includes("ROLE_DOCTOR")) && (
