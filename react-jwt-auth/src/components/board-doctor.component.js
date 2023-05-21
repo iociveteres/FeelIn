@@ -208,7 +208,8 @@ export default class BoardDoctor extends Component {
                   {this.state.patientsReady && (this.state.filtered.map((patient, index)=>{
                   return (
                     <div key={index}>
-                      <li  className="App-list__element"  onClick={e=>this.onClickPatient(patient.patientId,e)
+                      <li  className={(patient.status!==undefined) && (patient.status.statusCode === 0) ? "App-list__element Danger": "App-list__element"}
+                        onClick={e=>this.onClickPatient(patient.patientId,e)
                       }>  
                         <div className="Patient-info">
                           <h3>{patient.lastName+" "+patient.firstName+" "+patient.surname} </h3>

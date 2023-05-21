@@ -267,6 +267,13 @@ span {
   z-index: 3;
 }
 
+.App-list__element.Danger {
+
+  background-image: -moz-linear-gradient( 90deg, rgb(255, 212, 128) 0%, rgb(240,242,242) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(255, 212, 128) 0%, rgb(240,242,242) 100%);
+  box-shadow: 5.785px 6.894px 16.56px 1.44px rgba(0, 0, 0, 0.26);
+}
+
 .App-list__element:hover {
   background-image: -moz-linear-gradient( 90deg, rgb(233, 200, 200) 0%, rgb(240,242,242) 100%);
   background-image: -webkit-linear-gradient( 90deg, rgb(233, 200, 200) 0%, rgb(240,242,242) 100%);
