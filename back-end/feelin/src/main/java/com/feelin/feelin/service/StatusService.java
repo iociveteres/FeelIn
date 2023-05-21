@@ -30,6 +30,11 @@ public class StatusService {
 
     private Status checkStatus(List<Form> tail) {
         Status status = new Status();
+        if (tail.isEmpty()) {
+            status.setStatusCode(-1);
+            return status;
+        }
+
         int risk_factor = 0;
 
         for (Form e: tail) {
