@@ -106,7 +106,7 @@ export default class BoardPatient extends Component {
                   return (
                     <div key={index}>
                       <li className="App-list__element" onClick={e=>this.onClickForm(e, form.formId)} >
-                        <h3>Анкета №{index}</h3>
+                        <h3>Анкета №{index+1}</h3>
                         <p>Дата прохождения: {form.completionDate.slice(0,-9)}</p>
                       </li> 
                       {this.state.formPicked===form.formId && 
