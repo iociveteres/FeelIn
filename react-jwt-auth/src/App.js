@@ -17,10 +17,25 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      currentUser: undefined
+      currentUser: undefined,
+      modalActive: false
     };
     
   }
+
+  showModal(e) {
+  
+    this.setState({
+      modalActive: true
+    });
+  }
+
+  hideModal(e) {
+    this.setState({
+      modalActive: false
+    });
+  }
+
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
@@ -51,7 +66,33 @@ class App extends Component {
             <a href="/"><img src={logo} alt=""/></a>
             </div>
             <div>
-              <a href="/">Помощь</a>
+            <button className="App-button" onClick={e=>this.showModal(e)}>Помощь</button>
+              <div className={this.state.modalActive ? "Modal Active": "Modal"} onClick={e=>this.hideModal(e)}>
+                  <div className="Modal-content" onClick={e=>e.stopPropagation()}>
+                      {(currentUser!==undefined && currentUser.roles.includes("ROLE_DOCTOR")) && (
+                        <div className="Help">
+                          <p>
+                            В личном кабинете вам доступен список ваших пациентов. 
+                            Нажмите на пациента, чтобы раскрыть список анкет, заполненных этим пациентом. 
+                            Нажмите на анкету, чтобы раскрыть её и посмотреть показатели пациента.
+                          </p>
+                          <p>
+                            Вы можете воспользоваться строкой поиска, чтобы найти пациента по имени.
+                            Нажмите на переключатель "Сортировка по состоянию", чтобы пациенты с более худшим состоянием были подняты в вверх списка.
+                            Обратите внимание, пациенты с анкетами, вызывающими беспокойство, выделяются жёлтым.
+                          </p>
+                        </div>
+                      )}
+                      {(currentUser!==undefined && currentUser.roles.includes("ROLE_PATIENT")) && (
+                        <div className="Help">
+                          <p>
+                            В личном кабинете вы можете заполнить анкету, которую увидит ваш лечащий врач. Для этого нажмите на кнопку "Пройти новую анкету".
+                            Также вам доступны ранее пройденные анкеты, кликните на одну из них, чтобы увидеть отправленные данные.
+                          </p>
+                        </div>
+                      )}
+                  </div>
+                </div>
             </div>
             
         </header>

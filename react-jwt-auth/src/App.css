@@ -339,12 +339,14 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
   transform: scale(0);
   transition: 0.5s;
   z-index: 5;
 }
 
 .Modal.Active {
+  opacity: 1; 
   transform: scale(1);
 }
 
@@ -423,4 +425,19 @@ hr {
 .toggle-state:checked ~ .indicator {
   background: #33b9d1;
   transform: translate3d(25%, 0, 0);
+}
+
+.Help {
+  padding: 25px;
+  max-width: 65%;
+  max-height: 65%;
+  background: white;
+  border-radius: 25px;
+
+}
+
+.Modal-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
