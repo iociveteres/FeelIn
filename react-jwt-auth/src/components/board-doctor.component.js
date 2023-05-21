@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "../components/form.component";
 import UserService from "../services/user.service";
 import FormService from "../services/form.service";
+import AuthService from "../services/auth.service";
 
 export default class BoardDoctor extends Component {
   constructor(props) {
@@ -20,23 +21,23 @@ export default class BoardDoctor extends Component {
       formsReady: false,
       pickedPatient: undefined,
       formPicked: undefined,
-      searching: true,
-      filtered: []
+      filtered: [],
+      modalActive: false,
+      status: undefined
     };
   }
 
   onClickForm(e, id) {
     e.preventDefault()
     this.setState({
-      formPicked:id
+      formPicked:id,
+      modalActive:true
     });
   }
 
   onChangeSearch = async (e) => {
     e.preventDefault()
-    this.setState({
-      searching: true
-    });
+
     let convertToLc = e.target.value.toLowerCase()
     let filterData = this.state.patients.filter((el)=>{
       let nameToLc = el.firstName.toLowerCase()
@@ -56,10 +57,17 @@ export default class BoardDoctor extends Component {
   onSearchClick() {
     this.setState({
       searchTerm: "",
-      filtered: [],
-      patientsReady: false,
-      searching: false
+      filtered: this.state.patients,
+      pickedPatient: undefined,
+      formPicked: undefined,
     })
+  }
+
+
+  hideModal(e) {
+    this.setState({
+      modalActive: false
+    });
   }
 
   onClickPatient(id,e) {
@@ -91,6 +99,7 @@ export default class BoardDoctor extends Component {
 
 
   componentDidMount() {
+    let patientsArr = undefined
     UserService.getDocBoard(this.state.id).then(
       response => {
         this.setState({
@@ -113,8 +122,10 @@ export default class BoardDoctor extends Component {
       response => {
         this.setState({
           patients: response.data,
-          patientsReady:true
+          patientsReady:true,
+          filtered: response.data
         });
+        patientsArr = response.data
       },
       error => {
         this.setState({
@@ -127,6 +138,28 @@ export default class BoardDoctor extends Component {
         });
       }
     );
+    
+   
+    if (this.state.patientsReady) {
+      console.log(patientsArr)
+      for (let patient of patientsArr) {
+        UserService.getPatientStatus(patient.id).then(
+          response => {
+            patient.status = response.data
+            console.log(patient)
+          },
+          error => {
+            patient.status =
+               ((error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.message ||
+                error.toString())
+          }
+        );
+      }
+    }
+    
   }
 
   render() {
@@ -136,31 +169,39 @@ export default class BoardDoctor extends Component {
     const formsReady = this.state.formsReady
     return (
         <div className="Wrapper">
-            <header >
-                <h3 className="Border-header">{contentReady && (content.firstName+ " " + content.lastName + " " + content.surname)}</h3>
+            <header className="Board-headContainer">
+                <h3 className="Border-header">{contentReady && (content.lastName+ " " + content.firstName + " " + content.surname)}</h3>
+                <a href="/login" onClick={AuthService.logout}>Выйти</a>
             </header>
             <main>
               <input type="text" 
               className="form-control" 
               placeholder="Поиск"
+              value={this.state.searchTerm}
               onClick={this.onSearchClick}
               onChange={this.onChangeSearch}/>
-                <ul>
+                <ul className="Patient-list">
                   {this.state.patientsReady && (this.state.filtered.map((patient, index)=>{
                   return (
                     <div key={index}>
-                      <li  className="App-list__element " onClick={e=>this.onClickPatient(patient.patientId,e)
+                      <li  className="App-list__element"  onClick={e=>this.onClickPatient(patient.patientId,e)
                       }>  
                         <div className="Patient-info">
                           <h3>{patient.lastName+" "+patient.firstName+" "+patient.surname} </h3>
-                          <p>{this.state.pickedPatient===patient.patientId && ("Пол: " + (patient.male==="M" ? "Мужчина": "Женщина"))}</p>
-                          <p>{this.state.pickedPatient===patient.patientId && ("Дата рождения: " + patient.dateOfBirth.slice(0,-9))}</p>
-                          <p>{this.state.pickedPatient===patient.patientId && ( "Контактный номер: " + patient.contactNumber)}</p>
+                          <p>Состояние: {patient.status}</p>
+                          {this.state.pickedPatient===patient.patientId && (
+                            <div className="Patient-addinfo">
+                              <p>{("Пол: " + (patient.male==="M" ? "Мужчина": "Женщина"))}</p>
+                              <p>{("Дата рождения: " + patient.dateOfBirth.slice(0,-9))}</p>
+                              <p>{("Контактный номер: " + patient.contactNumber)}</p>
+                            </div>
+                          )}                    
                         </div>
-                        <div className="Patient-formist">
+                        <hr></hr>
+                        <div className="Patient-formlist">
                           <ul>
                             {
-                              this.state.pickedPatient===patient.patientId && formsReady && (forms.map((form, fIndex)=>{
+                              this.state.pickedPatient===patient.patientId && formsReady && (forms.reverse().map((form, fIndex)=>{
                    
                                 return(
                                 <div key={fIndex}>
@@ -168,9 +209,11 @@ export default class BoardDoctor extends Component {
                                     <h3>Анкета №{form.formId}</h3>
                                     <p>Дата прохождения: {form.completionDate.slice(0,-9)}</p>
                                   </li>
-                                  {this.state.formPicked===form.formId && <Form className="Biba"
-                                      formInfo={form}>
-                                  </Form> }
+                                  
+                                    {this.state.formPicked===form.formId && <Form className="Modal-content"
+                                        formInfo={form}>
+                                    </Form> }
+                                    <hr></hr>
                                 </div> )
                               }))
                             }

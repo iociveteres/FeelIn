@@ -24,13 +24,13 @@ export default class Form extends Component {
     const formInfo = this.state.formInfo
     return (
       <div className="Form-info"> 
-        <div>
-            <h3>Давление: {formInfo.pressureHigh}/{formInfo.pressureLow}</h3>
-            <h3>Пульс: {formInfo.pulse}</h3>
-            <h3>Температура: {formInfo.temperature}</h3>
-            <h3>Оценка сна: {formInfo.sleepQuality}</h3>
-            <h3>Оценка состояния: {formInfo.generalState}</h3>
-        </div>
+        <ul>
+            <li>Давление: {formInfo.pressureHigh}/{formInfo.pressureLow}</li>
+            <li>Пульс: {formInfo.pulse}</li>
+            <li>Температура: {formInfo.temperature}</li>
+            <li>Оценка сна: {formInfo.sleepQuality}</li>
+            <li>Оценка состояния: {formInfo.generalState}</li>
+        </ul>
       </div>
     );
   }

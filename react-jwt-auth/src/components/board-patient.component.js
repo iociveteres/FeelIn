@@ -3,6 +3,7 @@ import Form from "../components/form.component";
 import FormSend from "../components/form-send.component";
 import UserService from "../services/user.service";
 import FormService from "../services/form.service";
+import AuthService from "../services/auth.service";
 
 export default class BoardPatient extends Component {
   constructor(props) {
@@ -86,8 +87,9 @@ export default class BoardPatient extends Component {
     const formReady = this.state.formReady
     return (
         <div className="Wrapper">
-            <header >
-                <h3 className="Border-header">{contentReady && (content.firstName+ " " + content.lastName + " " + content.surname)}</h3>
+            <header className="Board-headContainer">
+                <h3 className="Border-header">{contentReady && (content.lastName+ " " + content.firstName + " " + content.surname)}</h3>
+                <a href="/login" onClick={AuthService.logout}>Выйти</a>
             </header>
             <main>
                 <button className="App-button" onClick={e=>this.showModal(e)}>Пройти новую анкету</button>

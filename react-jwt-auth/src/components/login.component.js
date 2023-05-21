@@ -83,7 +83,7 @@ class Login extends Component {
 
   render() {
     return (
-        <div className="Wrapper">
+        <div className="Wrapper Centered">
             <div className="App-form">
                 <Form
                     onSubmit={this.handleLogin}
@@ -140,6 +140,7 @@ class Login extends Component {
                     }}
                     />
                 </Form>
+                <a href="/register">Зарегистрироваться</a>
             </div>
             
         </div>

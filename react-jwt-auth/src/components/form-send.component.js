@@ -138,7 +138,7 @@ export default class FormSend extends Component {
               <div>
                 
                 <div className="form-group">
-                  <label htmlFor="pressHigh">Укажите верхнее давление<span className="imp">*</span></label>
+                  <label htmlFor="pressHigh"><span>Верхнее давление<span className="imp">*</span></span></label>
                   <Input
                     type="number"
                     className="form-control"
@@ -151,7 +151,7 @@ export default class FormSend extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="pressLow">Укажите нижнее давление<span className="imp">*</span></label>
+                  <label htmlFor="pressLow"><span>Нижнее давление<span className="imp">*</span></span></label>
                   <Input
                     type="number"
                     className="form-control"
@@ -164,7 +164,7 @@ export default class FormSend extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="pulse">Укажите пульс<span className="imp">*</span></label>
+                  <label htmlFor="pulse"><span>Пульс<span className="imp">*</span></span></label>
                   <Input
                     type="number"
                     className="form-control"
@@ -177,13 +177,14 @@ export default class FormSend extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="temperature">Укажите температуру<span className="imp">*</span></label>
+                  <label htmlFor="temperature"><span>Температура<span className="imp">*</span></span></label>
                   <Input
                     type="text"
                     className="form-control"
                     name="temperature"
                     inputtype="numeric"
                     pattern="^[3-4][0-9].[0-9]$"
+                    placeholder="Например, 36.6"
                     value={this.state.temperature}
                     onChange={this.onChangeTemp}
                     validations={[required]}
@@ -191,7 +192,7 @@ export default class FormSend extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="sleepQuality">Оцените свой сон от 0 до 10<span className="imp">*</span></label>
+                  <label htmlFor="sleepQuality"><span>Оценка сна (0-10)<span className="imp">*</span></span></label>
                   <Input
                     type="number"
                     className="form-control"
@@ -203,7 +204,7 @@ export default class FormSend extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="generalState">Оцените своё общее состояние от 0 до 10<span className="imp">*</span></label>
+                  <label htmlFor="generalState"><span>Оценка состояния (0-10)<span className="imp">*</span></span></label>
                   <Input
                     type="number"
                     className="form-control"

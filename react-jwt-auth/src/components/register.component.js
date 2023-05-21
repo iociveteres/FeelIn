@@ -58,13 +58,13 @@ export default class Register extends Component {
     this.state = {
       username: "",
       password: "",
-      role:"doctor",
+      role:"patient",
       firstName: "",
       lastName: "",
       surname: "",
       contactNumber: "",
       polyclinicId: 1,
-      male:null,
+      male:"M",
       dateOfBirth:null,
       cabinetNumber:null,
       specialization:null,
@@ -99,6 +99,7 @@ export default class Register extends Component {
     }
     else if (this.state.role === "patient") {
         this.setState({
+            male: "M",
             cabinetNumber: null,
             specialization : null
           });
@@ -176,7 +177,7 @@ export default class Register extends Component {
         this.state.contactNumber,
         this.state.polyclinicId,
         this.state.male,
-        this.state.dateOfBirth,
+        new Date(this.state.dateOfBirth.slice(0,-9)),
         this.state.cabinetNumber,
         this.state.specialization
       ).then(
@@ -205,7 +206,7 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div className="Wrapper">
+      <div className="Wrapper Centered">
         <div className="App-form">
 
           <Form
@@ -215,151 +216,158 @@ export default class Register extends Component {
             }}
           >
             {!this.state.successful && (
-              <div>
-                <div></div>
-                <div className="form-group">
-                  <label htmlFor="username">Логин<span className="imp">*</span></label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
-                  />
-                </div>
+              <div className="Grid">
+                <div>
+                  <div className="form-group">
+                    <label htmlFor="username"><span>Логин<span className="imp">*</span></span></label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="username"
+                      value={this.state.username}
+                      onChange={this.onChangeUsername}
+                      validations={[required, vusername]}
+                    />
+                  </div>
 
 
-                <div className="form-group">
-                  <label htmlFor="password">Пароль<span className="imp">*</span></label>
-                  <Input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required, vpassword]}
-                  />
+                  <div className="form-group">
+                    <label htmlFor="password"><span>Пароль<span className="imp">*</span></span></label>
+                    <Input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.onChangePassword}
+                      validations={[required, vpassword]}
+                    />
+                  </div>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="firstName">Ваше имя<span className="imp">*</span></label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="firstName"
-                    value={this.state.firstName}
-                    onChange={this.onChangeFirstname}
-                    validations={[required]}
-                  />
-                </div>
+                <div>
+                  <div className="form-group">
+                    <label htmlFor="lastName"><span>Фамилия<span className="imp">*</span></span></label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="lastName"
+                      value={this.state.lastName}
+                      onChange={this.onChangeLastname}
+                      validations={[required]}
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="lastName">Ваша фамилия<span className="imp">*</span></label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="lastName"
-                    value={this.state.lastName}
-                    onChange={this.onChangeLastname}
-                    validations={[required]}
-                  />
-                </div>
+                  <div className="form-group">
+                    <label htmlFor="firstName"><span>Имя<span className="imp">*</span></span></label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="firstName"
+                      value={this.state.firstName}
+                      onChange={this.onChangeFirstname}
+                      validations={[required]}
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="surname">Ваше отчество</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="surname"
-                    value={this.state.surname}
-                    onChange={this.onChangeSurname}
-                  />
-                </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="surname">Отчество</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="surname"
+                      value={this.state.surname}
+                      onChange={this.onChangeSurname}
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="contactNumber">Ваш контактный номер<span className="imp">*</span></label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="contactNumber"
-                    value={this.state.contactNumber}
-                    onChange={this.onChangeContactNumber}
-                    validations={[required]}
-                  />
-                </div>
+                  <div className="form-group">
+                    <label htmlFor="contactNumber"><span>Контактный номер<span className="imp">*</span></span></label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="contactNumber"
+                      value={this.state.contactNumber}
+                      onChange={this.onChangeContactNumber}
+                      validations={[required]}
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="role">Вы доктор или пациент?</label>
-                  <select className ="form-control" 
-                        value={this.state.value} 
-                        onChange={this.onChangeRole}
-                        name="role">
-                    <option value="doctor">Доктор</option>
-                    <option value="patient">Пациент</option>
-                </select>
                 </div>
-                {this.state.role === "patient" &&
-                    (<div className="form-group">
-                    <label htmlFor="male">Пол</label>
+                
+                <div>
+                  <div className="form-group">
+                    <label htmlFor="role">Доктор/Пациент</label>
                     <select className ="form-control" 
-                        value={this.state.value} 
-                        onChange={this.onChangeRole}
-                        name="male">
-                    <option value="M">Мужчина</option>
-                    <option value="F">Женщина</option>
-                </select>
-                  </div> 
-                  )
-                }
-                
-                {this.state.role === "patient" &&
-                    (<div className="form-group">
-                    <label htmlFor="dateOfBirth">Дата рождения</label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      name="dateOfBirth"
-                      value={this.state.dateOfBirth}
-                      onChange={this.onChangeDateOfBirth}
-                      validations={[required]}
-                    />
+                          value={this.state.role} 
+                          onChange={this.onChangeRole}
+                          name="role">
+                      <option value="doctor">Доктор</option>
+                      <option value="patient">Пациент</option>
+                  </select>
                   </div>
-                  )
-                }
+                  {this.state.role === "patient" &&
+                      (<div className="form-group">
+                      <label htmlFor="male">Пол</label>
+                      <select className ="form-control" 
+                          value={this.state.male} 
+                          onChange={this.onChangeMale}
+                          name="male">
+                      <option value="M">Мужчина</option>
+                      <option value="F">Женщина</option>
+                  </select>
+                    </div> 
+                    )
+                  }
+                  
+                  {this.state.role === "patient" &&
+                      (<div className="form-group">
+                      <label htmlFor="dateOfBirth">Дата рождения</label>
+                      <Input
+                        type="date"
+                        className="form-control"
+                        name="dateOfBirth"
+                        value={this.state.dateOfBirth}
+                        onChange={this.onChangeDateOfBirth}
+                        validations={[required]}
+                      />
+                    </div>
+                    )
+                  }
 
-                {this.state.role === "doctor" &&
-                    (<div className="form-group">
-                    <label htmlFor="cabinetNumber">Ваш кабинет<span className="imp">*</span></label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      name="cabinetNumber"
-                      value={this.state.cabinetNumber}
-                      onChange={this.onChangeCabinetNumber}
-                      validations={[required]}
-                    />
-                  </div>
-                  )
-                }
+                  {this.state.role === "doctor" &&
+                      (<div className="form-group">
+                      <label htmlFor="cabinetNumber">Кабинет<span className="imp">*</span></label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        name="cabinetNumber"
+                        value={this.state.cabinetNumber}
+                        onChange={this.onChangeCabinetNumber}
+                        validations={[required]}
+                      />
+                    </div>
+                    )
+                  }
+                  
+                  {this.state.role === "doctor" &&
+                      (<div className="form-group">
+                      <label htmlFor="specialization">Специализация<span className="imp">*</span></label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        name="specialization"
+                        value={this.state.specialization}
+                        onChange={this.onChangeSpecialization}
+                        validations={[required]}
+                      />
+                    </div>
+                    )
+                  }
+                </div>
                 
-                {this.state.role === "doctor" &&
-                    (<div className="form-group">
-                    <label htmlFor="specialization">Ваша специализация<span className="imp">*</span></label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      name="specialization"
-                      value={this.state.specialization}
-                      onChange={this.onChangeSpecialization}
-                      validations={[required]}
-                    />
-                  </div>
-                  )
-                }
                 
-
-                <div className="form-group">
+                <div className="form-group lastGR">
                   <button type="submit" className="App-button btn btn-primary">Зарегистрироваться</button>
                 </div>
               </div>
@@ -386,6 +394,7 @@ export default class Register extends Component {
               }}
             />
           </Form>
+          <a href="/login">Войти</a>
         </div>
       </div>
     );

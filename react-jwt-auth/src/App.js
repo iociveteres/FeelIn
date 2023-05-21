@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route, Link} from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import logo from './img/logo.png'
@@ -48,7 +48,11 @@ class App extends Component {
             <h1>Feel<span className="text_highlight">In</span></h1>
             <a href="/"><img src={logo} alt=""/></a>
             </div>
-            <a href="/">Помощь</a>
+            <div>
+              <a href="/">Главная</a>
+              <a href="/">Помощь</a>
+            </div>
+            
         </header>
         
         
