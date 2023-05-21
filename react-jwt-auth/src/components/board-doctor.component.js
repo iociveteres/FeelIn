@@ -215,7 +215,7 @@ export default class BoardDoctor extends Component {
                           <h3>{patient.lastName+" "+patient.firstName+" "+patient.surname} </h3>
                           {patient.status===undefined && this.forceUpdate()}
                           <p> Состояние: {patient.status!==undefined && (patient.status.statusCode === 0 ? "Плохое":
-                          (patient.status.statusCode===1 ? "В норме" : patient.status.statusCode===2 ? "Хорошее":null))}</p>
+                          (patient.status.statusCode===1 ? "В норме" : (patient.status.statusCode===2 ? "Хорошее":(patient.status.statusCode===1000 ? "Нет анкет":null))))}</p>
                           {this.state.pickedPatient===patient.patientId && (
                             <div className="Patient-addinfo">
                               <p>{("Пол: " + (patient.male==="M" ? "Мужчина": "Женщина"))}</p>

@@ -31,7 +31,7 @@ public class StatusService {
     private Status checkStatus(List<Form> tail) {
         Status status = new Status();
         if (tail.isEmpty()) {
-            status.setStatusCode(-1);
+            status.setStatusCode(1000);
             return status;
         }
 
