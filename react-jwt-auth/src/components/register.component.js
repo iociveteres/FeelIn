@@ -53,7 +53,7 @@ export default class Register extends Component {
     this.onChangeDateOfBirth = this.onChangeDateOfBirth.bind(this);
     this.onChangeCabinetNumber = this.onChangeCabinetNumber.bind(this);
     this.onChangeSpecialization = this.onChangeSpecialization.bind(this);
-
+    this.onChangePoly = this.onChangePoly.bind(this);
 
     this.state = {
       username: "",
@@ -63,7 +63,7 @@ export default class Register extends Component {
       lastName: "",
       surname: "",
       contactNumber: "",
-      polyclinicId: 1,
+      polyclinicId: undefined,
       male:"M",
       dateOfBirth:null,
       cabinetNumber:null,
@@ -79,8 +79,13 @@ export default class Register extends Component {
     });
   }
 
- 
+  onChangePoly(e) {
+    this.setState({
+      polyclinicId: e.target.value
+    });
+  }
 
+ 
   onChangePassword(e) {
     this.setState({
       password: e.target.value
@@ -289,6 +294,18 @@ export default class Register extends Component {
                       name="contactNumber"
                       value={this.state.contactNumber}
                       onChange={this.onChangeContactNumber}
+                      validations={[required]}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="polyclinicId"><span>№ поликлиники<span className="imp">*</span></span></label>
+                    <Input
+                      type="number"
+                      className="form-control"
+                      name="polyclinicId"
+                      value={this.state.polyclinicId}
+                      onChange={this.onChangePoly}
                       validations={[required]}
                     />
                   </div>
