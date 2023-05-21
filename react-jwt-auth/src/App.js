@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import logo from './img/logo.png'
@@ -19,6 +19,7 @@ class App extends Component {
     this.state = {
       currentUser: undefined
     };
+    
   }
 
   componentDidMount() {
@@ -39,6 +40,7 @@ class App extends Component {
   }
 
   render() {
+
     const {currentUser} = this.state;
 
     return (

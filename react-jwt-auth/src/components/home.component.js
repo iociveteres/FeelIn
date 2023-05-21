@@ -14,9 +14,8 @@ export default class Home extends Component {
   render() {
     return (
         <main className="AppMain">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore 
-            magna aliqua. Ut enim ad minim veniam, quis nostrud 
+            <p>Feel<span className="text_highlight">In</span> - Информационная система для анкетирования пациентов о самочувствии, 
+              предназначеная для использования участковыми и лечащими врачами, и их пациентами.
             </p>
             <div className="App-enter">
                 <div className="Wrapper" >

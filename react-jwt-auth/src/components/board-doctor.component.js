@@ -11,6 +11,7 @@ export default class BoardDoctor extends Component {
     this.onSearchClick = this.onSearchClick.bind(this);
     this.onClickPatient = this.onClickPatient.bind(this);
     this.onClickForm=this.onClickForm.bind(this);
+    this.onToggle=this.onToggle.bind(this);
     this.state = {
       id: this.props.id,
       content: undefined,
@@ -22,8 +23,7 @@ export default class BoardDoctor extends Component {
       pickedPatient: undefined,
       formPicked: undefined,
       filtered: [],
-      modalActive: false,
-      status: undefined
+      toggle: false
     };
   }
 
@@ -33,6 +33,23 @@ export default class BoardDoctor extends Component {
       formPicked:id,
       modalActive:true
     });
+  }
+
+  onToggle(e) {
+    let filtered = this.state.filtered.sort((a,b)=>a.status.statusCode - b.status.statusCode)
+    let filteredSt = this.state.patients
+    if (this.state.toggle === false) {
+      this.setState({
+        toggle:true,
+        filtered: filtered
+      })
+    } else {
+      this.setState({
+        toggle: false,
+        filtered: filteredSt
+
+      })
+    }
   }
 
   onChangeSearch = async (e) => {
@@ -120,16 +137,31 @@ export default class BoardDoctor extends Component {
     );
     UserService.getPatientByDoc(this.state.id).then(
       response => {
-        this.setState({
-          patients: response.data,
-          patientsReady:true,
-          filtered: response.data
-        });
         patientsArr = response.data
+        for (let patient of patientsArr) {
+          UserService.getPatientStatus(patient.patientId).then(
+            response => {
+              patient.status = response.data
+            },
+            error => {
+              patient.status =
+                 ((error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                  error.message ||
+                  error.toString())
+            }
+          );
+        }
+        this.setState({
+          patients : patientsArr,
+          filtered : patientsArr,
+          patientsReady: true
+        })
       },
       error => {
         this.setState({
-          content:
+          patients:
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
@@ -138,27 +170,6 @@ export default class BoardDoctor extends Component {
         });
       }
     );
-    
-   
-    if (this.state.patientsReady) {
-      console.log(patientsArr)
-      for (let patient of patientsArr) {
-        UserService.getPatientStatus(patient.id).then(
-          response => {
-            patient.status = response.data
-            console.log(patient)
-          },
-          error => {
-            patient.status =
-               ((error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                error.message ||
-                error.toString())
-          }
-        );
-      }
-    }
     
   }
 
@@ -174,12 +185,25 @@ export default class BoardDoctor extends Component {
                 <a href="/login" onClick={AuthService.logout}>Выйти</a>
             </header>
             <main>
-              <input type="text" 
-              className="form-control" 
-              placeholder="Поиск"
-              value={this.state.searchTerm}
-              onClick={this.onSearchClick}
-              onChange={this.onChangeSearch}/>
+              <div className="Board-headContainer">
+                <div className="label-text">Сортировка по состоянию</div>
+                <label className="labelToggle">
+                  
+                  <div className="toggle">
+                    <input className="toggle-state" type="checkbox" name="check" value={this.state.toggle} onChange={this.onToggle}/>
+                    <div className="indicator"></div>
+                  </div>
+                  
+                </label>
+
+                <input type="text" 
+                className="form-control" 
+                placeholder="Поиск"
+                value={this.state.searchTerm}
+                onClick={this.onSearchClick}
+                onChange={this.onChangeSearch}/>
+              </div>
+              
                 <ul className="Patient-list">
                   {this.state.patientsReady && (this.state.filtered.map((patient, index)=>{
                   return (
@@ -188,7 +212,9 @@ export default class BoardDoctor extends Component {
                       }>  
                         <div className="Patient-info">
                           <h3>{patient.lastName+" "+patient.firstName+" "+patient.surname} </h3>
-                          <p>Состояние: {patient.status}</p>
+                          {patient.status===undefined && this.forceUpdate()}
+                          <p> Состояние: {patient.status!==undefined && (patient.status.statusCode === 0 ? "Плохое":
+                          (patient.status.statusCode===1 ? "В норме" : patient.status.statusCode===2 ? "Хорошее":null))}</p>
                           {this.state.pickedPatient===patient.patientId && (
                             <div className="Patient-addinfo">
                               <p>{("Пол: " + (patient.male==="M" ? "Мужчина": "Женщина"))}</p>
@@ -201,7 +227,7 @@ export default class BoardDoctor extends Component {
                         <div className="Patient-formlist">
                           <ul>
                             {
-                              this.state.pickedPatient===patient.patientId && formsReady && (forms.reverse().map((form, fIndex)=>{
+                              this.state.pickedPatient===patient.patientId && formsReady && (forms.map((form, fIndex)=>{
                    
                                 return(
                                 <div key={fIndex}>

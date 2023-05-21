@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/form/';
+const API_URL = 'https://feelinbackend.onrender.com/form/';
 
 class FormService {
   getForm(id) {
