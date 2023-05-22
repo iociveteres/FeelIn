@@ -182,7 +182,7 @@ export default class Register extends Component {
         this.state.contactNumber,
         this.state.polyclinicId,
         this.state.male,
-        new Date(this.state.dateOfBirth.slice(0,-9)),
+        this.state.dateOfBirth===null? null: new Date(this.state.dateOfBirth),
         this.state.cabinetNumber,
         this.state.specialization
       ).then(
